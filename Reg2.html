@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Event Registration</title>
+<style>
+    body {
+        font-family: Arial;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #f5f5f5;
+    }
+
+    .container {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    table {
+        margin: auto;
+    }
+
+    td {
+        padding: 8px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2 style="text-align:center;">Event Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+<table>
+    <tr>
+        <td>Name:</td>
+        <td><input type="text" id="name" required></td>
+    </tr>
+
+    <tr>
+        <td>Email:</td>
+        <td><input type="email" id="email" required></td>
+    </tr>
+
+    <tr>
+        <td>Date of Birth:</td>
+        <td><input type="date" id="dob" required oninput="calculateAge()"></td>
+    </tr>
+
+    <tr>
+        <td>Age:</td>
+        <td><input type="number" id="age" readonly></td>
+    </tr>
+
+    <tr>
+        <td>Password:</td>
+        <td><input type="password" id="password" required></td>
+    </tr>
+
+    <tr>
+        <td>Confirm Password:</td>
+        <td><input type="password" id="confirmPassword" required></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="text-align:center;">
+            <button type="submit" class="btn">Submit</button>
+        </td>
+    </tr>
+</table>
+</form>
+</div>
+
+<script>
+function calculateAge() {
+    let dob = document.getElementById("dob").value;
+    if (!dob) return;
+
+    let today = new Date();
+    let birthDate = new Date(dob);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    document.getElementById("age").value = age;
+}
+
+function validateForm() {
+    let pass = document.getElementById("password").value;
+    let confirmPass = document.getElementById("confirmPassword").value;
+
+    if (pass !== confirmPass) {
+        alert("Passwords do not match!");
+        return false;
+    }
+
+    window.location.href = "thankyou.html";
+    return false;
+}
+</script>
+
+</body>
+</html>
+
+//Thank you page
+<!DOCTYPE html>
+<html>
+<head>
+<title>Thank You</title>
+<style>
+    body { 
+        font-family: Arial; 
+        text-align: center; 
+        margin-top: 100px; 
+    }
+</style>
+</head>
+
+<body>
+<h2>Thank You for Registering!</h2>
+<p>Your response has been recorded.</p>
+</body>
+</html>
